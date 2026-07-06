@@ -52,8 +52,8 @@
       --border-card: #E2E8F0;
       --border-card-hover: #CBD5E1;
       
-      --bg-navbar: rgba(243, 247, 250, 0.85);
-      --bg-nav-mobile: rgba(255, 255, 255, 0.98);
+      --bg-navbar: #0f2744;
+      --bg-nav-mobile: rgba(15, 39, 68, 0.98);
       --bg-footer: #0f2744;
       --bg-btn-outlined: rgba(255, 255, 255, 0.8);
       --bg-form-control: #FFFFFF;
@@ -137,6 +137,41 @@
     }
     body.light-mode .footer-contact-item svg {
       stroke: #3b82f6;
+    }
+
+    /* Light Mode Navbar adjustments (matching footer blue) */
+    body.light-mode .navbar {
+      background-color: var(--bg-navbar);
+      border-bottom-color: #1a365d;
+      box-shadow: 0 4px 20px rgba(7, 13, 25, 0.15);
+    }
+    body.light-mode .logo-wordmark {
+      color: #FFFFFF;
+    }
+    body.light-mode .nav-link {
+      color: #CBD5E1;
+    }
+    body.light-mode .nav-link:hover,
+    body.light-mode .nav-link.active {
+      color: #F8FAFC;
+    }
+    body.light-mode .nav-link::after {
+      background-color: #3B82F6;
+    }
+    body.light-mode .theme-icon-container {
+      color: #CBD5E1;
+    }
+    body.light-mode .theme-icon-container:hover {
+      color: #F8FAFC;
+    }
+    body.light-mode .nav-toggle {
+      color: #F8FAFC;
+    }
+    body.light-mode .nav-menu {
+      border-bottom-color: #1a365d;
+    }
+    body.light-mode .mobile-theme-label {
+      color: #CBD5E1;
     }
 
     body.light-mode .btn-filled {
