@@ -3543,6 +3543,13 @@
       submitBtn.textContent = 'SUBMITTING...';
       submitBtn.disabled = true;
 
+      // Extract all form data including hidden configurations
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
       // Submit data via fetch POST
       fetch("https://formsubmit.co/ajax/info.navcut@gmail.com", {
         method: "POST",
@@ -3550,14 +3557,7 @@
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          "Subject": "New Inquiry - NAVCUT Platform",
-          "Full Name": document.getElementById('full-name').value,
-          "Email Address": document.getElementById('email').value,
-          "Medical Institution": document.getElementById('institution').value,
-          "Phone Contact": document.getElementById('phone').value,
-          "Message": document.getElementById('message').value
-        })
+        body: JSON.stringify(data)
       })
       .then(response => {
         if (response.ok) {
