@@ -3639,14 +3639,8 @@
       }
     }
 
-    // Detect initial theme preference
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme === 'dark') {
-      setTheme(false);
-    } else {
-      setTheme(true); // default to light
-    }
+    // Always default to the light theme on initial page load
+    setTheme(true);
 
     // Event listeners to toggle theme and sync both switches
     if (themeCheckbox) {
