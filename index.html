@@ -3068,10 +3068,10 @@
           <!-- Right Column - Form -->
           <div class="contact-card">
             <form class="contact-form" id="inquiry-form" onsubmit="handleInquirySubmit(event)">
-              <!-- FormSubmit settings -->
-              <input type="hidden" name="_subject" value="New Inquiry - NAVCUT Platform">
-              <input type="hidden" name="_captcha" value="false">
-              <input type="hidden" name="_template" value="table">
+              <!-- Web3Forms settings -->
+              <input type="hidden" name="access_key" value="97a01804-c7b8-4ce4-901c-9efe385661b2">
+              <input type="hidden" name="subject" value="New Inquiry - NAVCUT Platform">
+              <input type="hidden" name="from_name" value="NAVCUT Website">
               <div class="form-row">
                 <div class="form-group">
                   <label for="full-name" class="form-label">Full Name / CMO Name</label>
@@ -3524,7 +3524,7 @@
       });
     });
 
-    // 5. Contact Form Submission via FormSubmit AJAX to info.navcut@gmail.com
+    // 5. Contact Form Submission via Web3Forms AJAX
     function handleInquirySubmit(event) {
       event.preventDefault();
       
@@ -3550,8 +3550,8 @@
         data[key] = value;
       });
 
-      // Submit data via fetch POST
-      fetch("https://formsubmit.co/ajax/info.navcut@gmail.com", {
+      // Submit data via fetch POST to Web3Forms API
+      fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',
