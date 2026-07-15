@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" class="light-mode">
 <head>
+  <script>
+    (function() {
+      function isPageRefresh() {
+        try {
+          const navEntries = performance.getEntriesByType('navigation');
+          if (navEntries.length > 0) {
+            return navEntries[0].type === 'reload';
+          }
+        } catch (e) {}
+        return performance.navigation.type === 1;
+      }
+
+      if (isPageRefresh()) {
+        const savedTheme = sessionStorage.getItem('theme') || localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.remove('light-mode');
+          return;
+        }
+      } else {
+        sessionStorage.removeItem('theme');
+        localStorage.removeItem('theme');
+      }
+      document.documentElement.classList.add('light-mode');
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NAVCUT — Advanced Surgical Robotics Platform | NeoScope</title>
@@ -3642,6 +3667,7 @@
         // Unchecked checkbox = light mode
         if (themeCheckbox) themeCheckbox.checked = false;
         if (themeCheckboxMobile) themeCheckboxMobile.checked = false;
+        sessionStorage.setItem('theme', 'light');
         localStorage.setItem('theme', 'light');
         if (mobileThemeLabel) mobileThemeLabel.textContent = 'Light Theme';
       } else {
@@ -3650,13 +3676,28 @@
         // Checked checkbox = dark mode (default)
         if (themeCheckbox) themeCheckbox.checked = true;
         if (themeCheckboxMobile) themeCheckboxMobile.checked = true;
+        sessionStorage.setItem('theme', 'dark');
         localStorage.setItem('theme', 'dark');
         if (mobileThemeLabel) mobileThemeLabel.textContent = 'Dark Theme';
       }
     }
 
-    // Always default to the light theme on initial page load
-    setTheme(true);
+    function isPageRefresh() {
+      try {
+        const navEntries = performance.getEntriesByType('navigation');
+        if (navEntries.length > 0) {
+          return navEntries[0].type === 'reload';
+        }
+      } catch (e) {}
+      return performance.navigation.type === 1;
+    }
+
+    // Only restore user preference on refresh, otherwise always load the light theme.
+    if (isPageRefresh() && (sessionStorage.getItem('theme') === 'dark' || localStorage.getItem('theme') === 'dark')) {
+      setTheme(false);
+    } else {
+      setTheme(true);
+    }
 
     // Event listeners to toggle theme and sync both switches
     if (themeCheckbox) {
